@@ -27,13 +27,50 @@ function rendertodos(){
     for (let i = 0; i < todoarray.length; i++){
 
         const newtodo = document.createElement("div");
-        const description = document.createElement("p");
-        newtodo.appendChild(description)
-        description.textContent = todoarray[i].name;
-        maindiv.appendChild(newtodo)
+        newtodo.classList.add("tododiv")
 
+        const description = document.createElement("p");
+        const text = document.createElement("p");
+        const priority = document.createElement("p");
+        const date = document.createElement("p");
+        const checklist = document.createElement("button");
+
+        text.textContent = todoarray[i].name;
+        description.textContent = todoarray[i].description;
+        priority.textContent = todoarray[i].priority;
+        date.textContent = todoarray[i].date;
+        checklist.textContent = todoarray[i].checklist;
+
+        maindiv.appendChild(newtodo);
+        newtodo.appendChild(description);
+        newtodo.appendChild(priority);
+        newtodo.appendChild(date);
+        newtodo.appendChild(checklist);
     }
 
+}
+
+function creatediv(){
+    const newtodo = document.createElement("div");
+        newtodo.classList.add("tododiv")
+
+        const description = document.createElement("p");
+        const text = document.createElement("p");
+        const priority = document.createElement("p");
+        const date = document.createElement("p");
+        const checklist = document.createElement("button");
+
+        text.textContent = todoarray[i].name;
+        description.textContent = todoarray[i].description;
+        priority.textContent = todoarray[i].priority;
+        date.textContent = todoarray[i].date;
+        checklist.textContent = todoarray[i].checklist;
+
+        maindiv.appendChild(newtodo);
+        newtodo.appendChild(description);
+        newtodo.appendChild(priority);
+        newtodo.appendChild(date);
+        newtodo.appendChild(checklist);
 }
 
 
