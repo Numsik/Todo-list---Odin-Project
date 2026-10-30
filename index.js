@@ -14,16 +14,12 @@ const maindiv = document.getElementById("todos")
 function rendertodos(){
     maindiv.innerHTML = '';
     for (let i = 0; i < todoarray.length; i++){
-        creatediv(todoarray[i].name,
-            todoarray[i].description,
-            todoarray[i].date,
-            todoarray[i].priority,
-            todoarray[i].checklist)
+        creatediv(todoarray[i])
     }
 
 }
 
-function creatediv(name,description,date,priority,checklist){
+function creatediv(array){
     const newtodo = document.createElement("div");
     newtodo.classList.add("tododiv")
 
@@ -31,13 +27,18 @@ function creatediv(name,description,date,priority,checklist){
     const textdiv = document.createElement("p");
     const prioritydiv = document.createElement("p");
     const datediv = document.createElement("p");
-    const checklistdiv = document.createElement("button");
+    const checklistdiv = document.createElement("input");
+    checklistdiv.type = "checkbox";
 
-    textdiv.textContent = name;
-    descriptiondiv.textContent = description;
-    prioritydiv.textContent = priority;
-    datediv.textContent = date;
-    checklistdiv.textContent = checklist;
+
+
+
+    textdiv.textContent = array.name;
+    descriptiondiv.textContent = array.description;
+    prioritydiv.textContent = array.priority;
+    datediv.textContent = array.date;
+    checklistdiv.checked = array.checklist;
+
 
     maindiv.appendChild(newtodo);
     newtodo.appendChild(textdiv);
@@ -45,10 +46,20 @@ function creatediv(name,description,date,priority,checklist){
     newtodo.appendChild(prioritydiv);
     newtodo.appendChild(datediv);
     newtodo.appendChild(checklistdiv);
+
+    checklistdiv.addEventListener("change", function(){
+        if (checklistdiv.checked){
+            array.checklist = true;
+        }else{
+            array.checklist = false;
+        }
+    });
+
 }
 
 document.getElementById("inptssend").addEventListener("click", function(){
     addtodo();
+    console.log(todoarray)
 });
 
 function addtodo(){

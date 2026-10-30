@@ -3,3 +3,6 @@
     display: flex;
     margin: 10px 0;
 }
+#creatingtododiv{
+    border: 1px solid black;
+}
