@@ -38,8 +38,6 @@ function creatediv(array){
     deletebtn.addEventListener("click", () => deletetodo(array));
 
 
-
-
     textdiv.textContent = array.name;
     descriptiondiv.textContent = array.description;
     prioritydiv.textContent = array.priority;
@@ -51,6 +49,15 @@ function creatediv(array){
     prioritydiv.classList.add("prioritydiv");
     datediv.classList.add("datediv");
     checklistdiv.classList.add("checklistdiv");
+
+    if(array.priority === "medium"){
+        prioritydiv.style.backgroundColor = "orange";
+    }else if(array.priority === "high"){
+        prioritydiv.style.backgroundColor = "red";
+        
+    }else{
+        prioritydiv.style.backgroundColor = "grey";
+    }
 
 
 
@@ -82,17 +89,24 @@ function addtodo(){
     const nameinp = document.getElementById("nameinpt").value;
     const description = document.getElementById("descriptioninpt").value;
     const date = document.getElementById("dateinpt").value;
-    const priority = document.getElementById("priorityinpt").value;
-    const checklist = document.getElementById("checklistinpt").value;
+
+    const priority = document.getElementById("priorityinpt");
+    const prioritytext = priority.value
+
+
+    const checklist = document.getElementById("checklistinpt").checked;
     const id = crypto.randomUUID();
-    todoarray.push(createTodo(nameinp,description,date,priority,checklist,id));
+    todoarray.push(createTodo(nameinp,description,date,prioritytext,checklist,id));
     rendertodos();
+    
 
-
+    document.getElementById("nameinpt").value = "";
+    document.getElementById("descriptioninpt").value = "";
+    document.getElementById("dateinpt").value = "";
+    document.getElementById("priorityinpt").value = "";
+    document.getElementById("checklistinpt").checked = "";
 }
-
 function deletetodo(array){
-
     for (let i = 0; i < todoarray.length; i++){
         console.log(todoarray[i].id)
         if (todoarray[i].id === array.id){
@@ -101,11 +115,9 @@ function deletetodo(array){
             todoarray.splice(i,1);
         }
     }
-
     rendertodos()
-
-
 }
+
 
 
 rendertodos()
