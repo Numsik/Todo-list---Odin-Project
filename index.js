@@ -38,6 +38,10 @@ function creatediv(array){
     deletebtn.classList.add("deletebtn")
     newtodo.appendChild(deletebtn)
 
+    const editbtn = document.createElement("button");
+    editbtn.innerHTML = "Edit";
+    
+    editbtn.addEventListener("click", () => edittodo(array));
     deletebtn.addEventListener("click", () => deletetodo(array));
 
 
@@ -52,6 +56,7 @@ function creatediv(array){
     prioritydiv.classList.add("prioritydiv");
     datediv.classList.add("datediv");
     checklistdiv.classList.add("checklistdiv");
+    newtodo.appendChild(editbtn);
 
     if(array.priority === "medium"){
         prioritydiv.style.backgroundColor = "orange";
@@ -62,16 +67,12 @@ function creatediv(array){
         prioritydiv.style.backgroundColor = "grey";
     }
 
-
-
     maindiv.appendChild(newtodo);
     newtodo.appendChild(textdiv);
     newtodo.appendChild(descriptiondiv);
     newtodo.appendChild(prioritydiv);
     newtodo.appendChild(datediv);
     newtodo.appendChild(checklistdiv);
-
-    
 
     checklistdiv.addEventListener("change", function(){
         if (checklistdiv.checked){
@@ -124,6 +125,9 @@ function deletetodo(array){
     saveToLocalStorage();
 }
 
+function edittodo(array){
+    
+}
 
 
 rendertodos()
