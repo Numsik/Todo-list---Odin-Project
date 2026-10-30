@@ -1,12 +1,12 @@
 
-function createTodo(name,description,date,priority,checklist){
-    return {name,description,date,priority,checklist};
+function createTodo(name,description,date,priority,checklist,id){
+    return {name,description,date,priority,checklist,id};
 }
 
 let todoarray = [];
 
-let uvarittodo = createTodo("Uvarit", "Musis uvarit","02/04/2026","high",false);
-let uklidittodo = createTodo("Uklidit", "Musis uklidit","05/04/2026","medium",true);
+let uvarittodo = createTodo("Uvarit", "Musis uvarit","02/04/2026","high",false,crypto.randomUUID());
+let uklidittodo = createTodo("Uklidit", "Musis uklidit","05/04/2026","medium",true,crypto.randomUUID());
 todoarray.push(uvarittodo,uklidittodo);
 
 const maindiv = document.getElementById("todos")
@@ -30,6 +30,13 @@ function creatediv(array){
     const checklistdiv = document.createElement("input");
     checklistdiv.type = "checkbox";
 
+    const deletebtn = document.createElement("button");
+    deletebtn.innerHTML = "Delete"
+    deletebtn.classList.add("deletebtn")
+    newtodo.appendChild(deletebtn)
+
+    deletebtn.addEventListener("click", () => deletetodo(array));
+
 
 
 
@@ -39,6 +46,13 @@ function creatediv(array){
     datediv.textContent = array.date;
     checklistdiv.checked = array.checklist;
 
+    textdiv.classList.add("textdiv");
+    descriptiondiv.classList.add("descriptiondiv");
+    prioritydiv.classList.add("prioritydiv");
+    datediv.classList.add("datediv");
+    checklistdiv.classList.add("checklistdiv");
+
+
 
     maindiv.appendChild(newtodo);
     newtodo.appendChild(textdiv);
@@ -46,6 +60,8 @@ function creatediv(array){
     newtodo.appendChild(prioritydiv);
     newtodo.appendChild(datediv);
     newtodo.appendChild(checklistdiv);
+
+    
 
     checklistdiv.addEventListener("change", function(){
         if (checklistdiv.checked){
@@ -68,13 +84,26 @@ function addtodo(){
     const date = document.getElementById("dateinpt").value;
     const priority = document.getElementById("priorityinpt").value;
     const checklist = document.getElementById("checklistinpt").value;
-    todoarray.push(createTodo(nameinp,description,date,priority,checklist));
+    const id = crypto.randomUUID();
+    todoarray.push(createTodo(nameinp,description,date,priority,checklist,id));
     rendertodos();
 
 
 }
 
-function deletetodo(name){
+function deletetodo(array){
+
+    for (let i = 0; i < todoarray.length; i++){
+        console.log(todoarray[i].id)
+        if (todoarray[i].id === array.id){
+
+            console.log("found it")
+            todoarray.splice(i,1);
+        }
+    }
+
+    rendertodos()
+
 
 }
 
