@@ -3,13 +3,16 @@ function createTodo(name,description,date,priority,checklist,id){
     return {name,description,date,priority,checklist,id};
 }
 
-let todoarray = [];
-
 let uvarittodo = createTodo("Uvarit", "Musis uvarit","02/04/2026","high",false,crypto.randomUUID());
 let uklidittodo = createTodo("Uklidit", "Musis uklidit","05/04/2026","medium",true,crypto.randomUUID());
-todoarray.push(uvarittodo,uklidittodo);
+
+let todoarray = JSON.parse(localStorage.getItem('todoarray')) || [uklidittodo,uvarittodo]
 
 const maindiv = document.getElementById("todos")
+
+function saveToLocalStorage(){
+    localStorage.setItem('todoarray',JSON.stringify(todoarray));
+}
 
 function rendertodos(){
     maindiv.innerHTML = '';
@@ -83,6 +86,7 @@ function creatediv(array){
 document.getElementById("inptssend").addEventListener("click", function(){
     addtodo();
     console.log(todoarray)
+    saveToLocalStorage();
 });
 
 function addtodo(){
@@ -98,6 +102,7 @@ function addtodo(){
     const id = crypto.randomUUID();
     todoarray.push(createTodo(nameinp,description,date,prioritytext,checklist,id));
     rendertodos();
+    saveToLocalStorage();
     
 
     document.getElementById("nameinpt").value = "";
@@ -115,7 +120,8 @@ function deletetodo(array){
             todoarray.splice(i,1);
         }
     }
-    rendertodos()
+    rendertodos();
+    saveToLocalStorage();
 }
 
 
