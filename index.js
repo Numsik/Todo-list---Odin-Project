@@ -41,7 +41,10 @@ function creatediv(array){
     const editbtn = document.createElement("button");
     editbtn.innerHTML = "Edit";
     
-    editbtn.addEventListener("click", () => edittodo(array));
+    editbtn.addEventListener("click", function(){
+        edittodo(array)
+        isClosed()
+    });
     deletebtn.addEventListener("click", () => deletetodo(array));
 
 
@@ -90,6 +93,20 @@ document.getElementById("inptssend").addEventListener("click", function(){
     saveToLocalStorage();
 });
 
+function isClosed(){
+    const editcontainer = document.getElementById("editcontainer")
+    if (editcontainer.style.display === "none"){
+        editcontainer.style.display = "flex";
+    }else{
+        editcontainer.style.display = "none";
+    }
+}
+
+document.getElementById("editbtn").addEventListener("click", function(){
+    console.log("funguje aspon toto")
+    isClosed()
+});
+
 function addtodo(){
     const nameinp = document.getElementById("nameinpt").value;
     const description = document.getElementById("descriptioninpt").value;
@@ -126,6 +143,12 @@ function deletetodo(array){
 }
 
 function edittodo(array){
+    const nameinp = document.getElementById("nameinpt").value;
+    const descriptioninpt = document.getElementById("descriptioninpt").value;
+    const dateinpt = document.getElementById("dateinpt").value;
+    const checklistinpt = document.getElementById("checklistinpt").checked;
+    const priorityinpt = document.getElementById("priorityinpt").value;
+
     
 }
 
