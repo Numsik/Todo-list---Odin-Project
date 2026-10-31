@@ -39,6 +39,7 @@ function creatediv(array){
     newtodo.appendChild(deletebtn)
 
     const editbtn = document.createElement("button");
+    editbtn.classList.add("editbtn")
     editbtn.innerHTML = "Edit";
     
     editbtn.addEventListener("click", function(){
@@ -153,7 +154,7 @@ function edittodo(array){
     nameinp.value = array.name;
     descriptioninpt.value = array.description;
     dateinpt.value = array.date;
-    checklistinpt.value = array.checklist;
+    checklistinpt.checked = array.checklist;
     priorityinpt.value = array.priority;
 
     const btnsendedit = document.getElementById("btnsendedit")
@@ -164,7 +165,10 @@ function edittodo(array){
             if (todoarray[i].id === arrayid){
                 todoarray.splice(i,1);
                 todoarray.push(newarray);
-                rendertodos()
+                rendertodos();
+                saveToLocalStorage();
+                document.getElementById("editcontainer").style.display = "none";
+
             }
         }
     });
