@@ -143,13 +143,32 @@ function deletetodo(array){
 }
 
 function edittodo(array){
-    const nameinp = document.getElementById("nameinpt").value;
-    const descriptioninpt = document.getElementById("descriptioninpt").value;
-    const dateinpt = document.getElementById("dateinpt").value;
-    const checklistinpt = document.getElementById("checklistinpt").checked;
-    const priorityinpt = document.getElementById("priorityinpt").value;
+    const arrayid = array.id
+    const nameinp = document.getElementById("nameinptedit");
+    const descriptioninpt = document.getElementById("descriptioninptedit");
+    const dateinpt = document.getElementById("dateinptedit");
+    const checklistinpt = document.getElementById("checklistinptedit")
+    const priorityinpt = document.getElementById("priorityinptedit");
 
-    
+    nameinp.value = array.name;
+    descriptioninpt.value = array.description;
+    dateinpt.value = array.date;
+    checklistinpt.value = array.checklist;
+    priorityinpt.value = array.priority;
+
+    const btnsendedit = document.getElementById("btnsendedit")
+    btnsendedit.addEventListener("click", function(){
+        const newarray = createTodo(nameinp.value,descriptioninpt.value,dateinpt.value,priorityinpt.value,checklistinpt.checked,arrayid)
+
+        for (let i = 0; i < todoarray.length; i++){
+            if (todoarray[i].id === arrayid){
+                todoarray.splice(i,1);
+                todoarray.push(newarray);
+                rendertodos()
+            }
+        }
+    });
+
 }
 
 
